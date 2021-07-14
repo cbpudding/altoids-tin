@@ -1,0 +1,30 @@
+{
+    "schemaVersion": 1,
+    "id": "altoidstin",
+    "version": "${version}",
+    "name": "Altoids Tin",
+    "description": "An assortment of random ideas we had while developing",
+    "authors": [
+        "Alexander Hill(cbpudding)"
+    ],
+    "contact": {
+        "homepage": "https://breadpudding.dev/",
+        "sources": "https://github.com/cbpudding/altoids-tin"
+    },
+    "license": "MIT-0",
+    "icon": "assets/altoidstin/icon.png",
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "dev.breadpudding.altoidstin.AltoidsTin"
+        ]
+    },
+    "mixins": [],
+    "depends": {
+        "fabricloader": "*",
+        "fabric": "*",
+        "minecraft": "1.17.x",
+        "java": ">=16"
+    },
+    "suggests": {}
+}
