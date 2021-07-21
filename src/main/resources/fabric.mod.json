@@ -5,10 +5,20 @@
     "name": "Altoids Tin",
     "description": "An assortment of random ideas we had while developing",
     "authors": [
-        "Alexander Hill(cbpudding)"
+        {
+            "name": "Alexander Hill(cbpudding)",
+            "contact": {
+                "discord": "Breadpudding#9078",
+                "email": "CodeBreadpudding@gmail.com",
+                "homepage": "https://breadpudding.dev/"
+            }
+        },
+        {
+            "name": "Tyler Stoddard(T51bS01eSurviv0r)",
+            "contact": {}
+        }
     ],
     "contact": {
-        "homepage": "https://breadpudding.dev/",
         "sources": "https://github.com/cbpudding/altoids-tin"
     },
     "license": "MIT-0",
@@ -19,12 +29,10 @@
             "dev.breadpudding.altoidstin.AltoidsTin"
         ]
     },
-    "mixins": [],
     "depends": {
         "fabricloader": ">=0.11.3",
         "fabric": "*",
         "minecraft": "1.17.x",
         "java": ">=16"
-    },
-    "suggests": {}
+    }
 }
