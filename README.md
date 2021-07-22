@@ -9,6 +9,7 @@ A mod filled with anything that we find interesting enough to implement
 ### In Progress
 
 - Hash Browns
+- Potato Shreds
 
 ### Planned
 
