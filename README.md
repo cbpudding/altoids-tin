@@ -4,12 +4,12 @@ A mod filled with anything that we find interesting enough to implement
 
 ## Features
 
-*Nothing yet*
+- Hash Browns
+- Potato Shreds
 
 ### In Progress
 
-- Hash Browns
-- Potato Shreds
+*Nothing yet*
 
 ### Planned
 
