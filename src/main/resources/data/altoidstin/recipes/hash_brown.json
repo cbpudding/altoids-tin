@@ -1,0 +1,8 @@
+{
+    "type": "smelting",
+    "ingredient": {
+        "item": "altoidstin:potato_shreds"
+    },
+    "result": "altoidstin:hash_brown",
+    "experience": 0.4
+}

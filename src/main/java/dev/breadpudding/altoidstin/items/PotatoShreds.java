@@ -1,6 +1,7 @@
 package dev.breadpudding.altoidstin.items;
 
 import dev.breadpudding.altoidstin.AltoidsTin;
+import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
@@ -12,12 +13,11 @@ import net.minecraft.util.registry.Registry;
  * @author Alexander Hill
  */
 public class PotatoShreds {
-    /**
-     * The item itself
-     * 
-     * @author Alexander Hill
-     */
-    public static final Item POTATO_SHREDS = new Item(new Item.Settings().group(ItemGroup.FOOD));
+    private static final FoodComponent FOOD_COMPONENT = new FoodComponent.Builder().alwaysEdible().hunger(1).build();
+    private static final Identifier IDENTIFIER = new Identifier(AltoidsTin.MOD_ID, "potato_shreds");
+    private static final Item.Settings ITEM_SETTINGS = new Item.Settings().group(ItemGroup.FOOD).food(FOOD_COMPONENT);
+
+    public static final Item POTATO_SHREDS = new Item(ITEM_SETTINGS);
 
     /**
      * Registers the potato shreds to that they appear in-game
@@ -25,6 +25,6 @@ public class PotatoShreds {
      * @author Alexander Hill
      */
     public static void register() {
-        Registry.register(Registry.ITEM, new Identifier(AltoidsTin.MOD_ID, "potato_shreds"), POTATO_SHREDS);
+        Registry.register(Registry.ITEM, IDENTIFIER, POTATO_SHREDS);
     }
 }

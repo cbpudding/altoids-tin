@@ -1,0 +1,8 @@
+{
+    "type": "stonecutting",
+    "ingredient": {
+        "item": "minecraft:potato"
+    },
+    "result": "altoidstin:potato_shreds",
+    "count": 2
+}
