@@ -17,4 +17,4 @@ A mod filled with anything that we find interesting enough to implement
 
 ### Suggested
 
-*Nothing yet*
+- Infinity Chest

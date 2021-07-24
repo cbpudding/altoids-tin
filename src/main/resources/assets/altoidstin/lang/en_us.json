@@ -1,5 +1,22 @@
 {
+    "block.altoidstin.trapped_coal_ore": "Trapped Coal Ore",
+    "block.altoidstin.trapped_copper_ore": "Trapped Copper Ore",
+    "block.altoidstin.trapped_deepslate_coal_ore": "Trapped Deepslate Coal Ore",
+    "block.altoidstin.trapped_deepslate_copper_ore": "Trapped Deepslate Copper Ore",
+    "block.altoidstin.trapped_deepslate_diamond_ore": "Trapped Deepslate Diamond Ore",
+    "block.altoidstin.trapped_deepslate_emerald_ore": "Trapped Deepslate Emerald Ore",
+    "block.altoidstin.trapped_deepslate_gold_ore": "Trapped Deepslate Gold Ore",
+    "block.altoidstin.trapped_deepslate_iron_ore": "Trapped Deepslate Iron Ore",
+    "block.altoidstin.trapped_deepslate_lapis_ore": "Trapped Deepslate Lapis Lazuli Ore",
+    "block.altoidstin.trapped_deepslate_redstone_ore": "Trapped Deepslate Redstone Ore",
     "block.altoidstin.trapped_diamond_ore": "Trapped Diamond Ore",
+    "block.altoidstin.trapped_emerald_ore": "Trapped Emerald Ore",
+    "block.altoidstin.trapped_gold_ore": "Trapped Gold Ore",
+    "block.altoidstin.trapped_iron_ore": "Trapped Iron Ore",
+    "block.altoidstin.trapped_lapis_ore": "Trapped Lapis Lazuli Ore",
+    "block.altoidstin.trapped_nether_gold_ore": "Trapped Nether Gold Ore",
+    "block.altoidstin.trapped_nether_quartz_ore": "Trapped Nether Quartz Ore",
+    "block.altoidstin.trapped_redstone_ore": "Trapped Redstone Ore",
     "item.altoidstin.hash_brown": "Hash Brown",
     "item.altoidstin.potato_shreds": "Potato Shreds"
 }
