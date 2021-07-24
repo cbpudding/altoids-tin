@@ -25,6 +25,7 @@ public class AltoidsTin implements ModInitializer {
     public void onInitialize() {
         HashBrown.register();
         PotatoShreds.register();
+        TrappedOre.register();
         // ...
     }
 }

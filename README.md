@@ -9,7 +9,7 @@ A mod filled with anything that we find interesting enough to implement
 
 ### In Progress
 
-*Nothing yet*
+- Trapped Ore
 
 ### Planned
 
@@ -17,4 +17,4 @@ A mod filled with anything that we find interesting enough to implement
 
 ### Suggested
 
-- Shrubbery(We require it)
+*Nothing yet*
