@@ -16,11 +16,11 @@ import net.minecraft.util.registry.Registry;
  * @author Alexander Hill
  */
 public class SimpleBlock {
-    private Block block;
-    private BlockItem blockItem;
-    private FabricBlockSettings blockSettings;
-    private Identifier id;
-    private Item.Settings itemSettings;
+    protected Block block;
+    protected BlockItem blockItem;
+    protected FabricBlockSettings blockSettings;
+    protected Identifier id;
+    protected Item.Settings itemSettings;
 
     /**
      * Constructs a block using a bunch of classes under the hood
@@ -31,9 +31,9 @@ public class SimpleBlock {
      * @param strength
      * @param group What item group the block is a part of
      */
-    public SimpleBlock(String id, Material material, float strength, ItemGroup group) {
+    public SimpleBlock(String id, Material material, float hardness, float resistance, ItemGroup group) {
         this.id = new Identifier(AltoidsTin.MOD_ID, id);
-        this.blockSettings = FabricBlockSettings.of(material).strength(strength);
+        this.blockSettings = FabricBlockSettings.of(material).strength(hardness, resistance);
         this.block = new Block(this.blockSettings);
         this.itemSettings = new Item.Settings().group(group);
         this.blockItem = new BlockItem(this.block, this.itemSettings);
