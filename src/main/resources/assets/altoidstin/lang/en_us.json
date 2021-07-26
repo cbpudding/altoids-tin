@@ -17,6 +17,7 @@
     "block.altoidstin.trapped_nether_gold_ore": "Trapped Nether Gold Ore",
     "block.altoidstin.trapped_nether_quartz_ore": "Trapped Nether Quartz Ore",
     "block.altoidstin.trapped_redstone_ore": "Trapped Redstone Ore",
+    "death.attack.trappedOre": "%1$s fell for a trap",
     "item.altoidstin.hash_brown": "Hash Brown",
     "item.altoidstin.potato_shreds": "Potato Shreds"
 }

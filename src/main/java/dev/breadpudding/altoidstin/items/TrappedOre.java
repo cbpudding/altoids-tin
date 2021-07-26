@@ -3,6 +3,8 @@ package dev.breadpudding.altoidstin.items;
 import java.util.Random;
 import java.util.function.Predicate;
 
+import org.jetbrains.annotations.Nullable;
+
 import dev.breadpudding.altoidstin.AltoidsTin;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -14,13 +16,20 @@ import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Material;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.stat.Stats;
 import net.minecraft.structure.rule.RuleTest;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
@@ -106,18 +115,20 @@ public class TrappedOre {
         }
 
         @Override
-        public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+        public void afterBreak(World world, PlayerEntity player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack) {
+            // Increase statistics and add exhaustion (default behavior on block break)
+            player.incrementStat(Stats.MINED.getOrCreateStat(this));
+            player.addExhaustion(0.005F);
+
             if(!world.isClient) {
                 ServerWorld serverWorld = (ServerWorld)world;
-                // TODO: Does Silk Touch guarantee that it won't blow up?
-                if(!player.isCreative()) {
-                    if(Math.random() > 0.5) {
-                        // TODO: Can we use a custom death message here(preferably one to humiliate players)?
-                        Explosion explosion = serverWorld.createExplosion(null, DamageSource.explosion(player), new ExplosionBehavior(), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 5.0f, true, DestructionType.DESTROY);
-                        explosion.collectBlocksAndDamageEntities();
-                    } else {
-                        // TODO: Drop the ore since it didn't explode.
-                    }
+                if(!player.isCreative() && Math.random() > 0.5 && EnchantmentHelper.getLevel(Enchantments.SILK_TOUCH, stack) == 0) {
+                    Explosion explosion = serverWorld.createExplosion(null, new TrappedOreDamageSource(), new ExplosionBehavior(), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 5.0f, true, DestructionType.DESTROY);
+                    explosion.collectBlocksAndDamageEntities();
+                } else {
+                    // Player a failed explosion noise and drop the block
+                    serverWorld.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.2f, 1f);
+                    dropStacks(state, serverWorld, pos, blockEntity, player, stack);
                 }
             }
         }
@@ -160,6 +171,15 @@ public class TrappedOre {
             }
             // Add the gunpowder particle to the world
             world.addParticle(ParticleTypes.SMOKE, x, y, z, 0.0D, 0.0D, 0.0D);
+        }
+    }
+
+    /*
+     * A class to allow for death messages at `death.attack.trappedOre`
+     */
+    public class TrappedOreDamageSource extends DamageSource {
+        public TrappedOreDamageSource() {
+            super("trappedOre");
         }
     }
 
