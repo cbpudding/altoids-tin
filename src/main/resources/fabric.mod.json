@@ -3,7 +3,7 @@
     "id": "altoidstin",
     "version": "${version}",
     "name": "Altoids Tin",
-    "description": "Strange women lying in ponds distributing swords is no basis for a system of government!",
+    "description": "An altoids tin, while originally containing the classic mints, has been used for storing a variety of items other than the mints. This mod carries on that tradition by not containing what it says on the tin.",
     "authors": [
         {
             "name": "Alexander Hill(cbpudding)",
@@ -12,6 +12,10 @@
                 "email": "CodeBreadpudding@gmail.com",
                 "homepage": "https://breadpudding.dev/"
             }
+        },
+        {
+            "name": "Nicholas McDaniel(Nicks_world)",
+            "contact": {}
         },
         {
             "name": "Tyler Stoddard(T51bS01eSurviv0r)",

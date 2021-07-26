@@ -17,4 +17,12 @@ A mod filled with anything that we find interesting enough to implement
 
 ### Suggested
 
+- друг
 - Infinity Chest
+- Radio
+
+## Supported Languages
+
+- Deutsche
+- English
+- 日本語
