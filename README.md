@@ -13,7 +13,7 @@ A mod filled with anything that we find interesting enough to implement
 
 ### Planned
 
-*Nothing yet*
+- Boat/Cart Rockets
 
 ### Suggested
 

@@ -54,7 +54,6 @@ public class TrappedOre {
     private OreType type;
 
     public TrappedOre(String id, float hardness, float resistance, int miningLevel, OreType type, int lowest, int highest, int veinSize, int veinCount) {
-        // TODO: Add parameters for acceptable depth, vein size, and vein count.
         this.id = new Identifier(AltoidsTin.MOD_ID, id);
         this.blockSettings = FabricBlockSettings.of(Material.STONE).strength(hardness, resistance).breakByTool(FabricToolTags.PICKAXES, miningLevel).requiresTool();
         this.block = new TrappedBlock(this.blockSettings);
@@ -92,6 +91,7 @@ public class TrappedOre {
         if(this.type == OreType.NETHER) {
             foundLocation = BiomeSelectors.foundInTheNether();
         }
+        // TODO: Find a way to do this without using deprecated APIs
         BiomeModifications.addFeature(foundLocation, GenerationStep.Feature.UNDERGROUND_ORES, key);
     }
 
@@ -110,18 +110,22 @@ public class TrappedOre {
             if(!world.isClient) {
                 ServerWorld serverWorld = (ServerWorld)world;
                 // TODO: Does Silk Touch guarantee that it won't blow up?
-                if(!player.isCreative() && Math.random() > 0.5) {
-                    // TODO: Can we use a custom death message here(preferably one to humiliate players)?
-                    Explosion explosion = serverWorld.createExplosion(null, DamageSource.explosion(player), new ExplosionBehavior(), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 5.0f, true, DestructionType.DESTROY);
-                    explosion.collectBlocksAndDamageEntities();
+                if(!player.isCreative()) {
+                    if(Math.random() > 0.5) {
+                        // TODO: Can we use a custom death message here(preferably one to humiliate players)?
+                        Explosion explosion = serverWorld.createExplosion(null, DamageSource.explosion(player), new ExplosionBehavior(), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 5.0f, true, DestructionType.DESTROY);
+                        explosion.collectBlocksAndDamageEntities();
+                    } else {
+                        // TODO: Drop the ore since it didn't explode.
+                    }
                 }
-                // TODO: Drop the ore if it doesn't explode.
             }
         }
 
         @Environment(EnvType.CLIENT)
         @Override
         public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+            // TODO: Make particles less noticible
             // Get the current position of the block
             double x = pos.getX();
             double y = pos.getY();
