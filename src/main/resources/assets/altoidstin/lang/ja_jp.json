@@ -1,4 +1,23 @@
 {
+    "block.altoidstin.trapped_coal_ore": "ブービートラップ石炭鉱石",
+    "block.altoidstin.trapped_copper_ore": "ブービートラップ銅鉱石",
+    "block.altoidstin.trapped_deepslate_coal_ore": "ブービートラップ深層石炭鉱石",
+    "block.altoidstin.trapped_deepslate_copper_ore": "ブービートラップ深層銅鉱石",
+    "block.altoidstin.trapped_deepslate_diamond_ore": "ブービートラップ深層ダイヤモンド鉱石",
+    "block.altoidstin.trapped_deepslate_emerald_ore": "ブービートラップ深層エメラルド鉱石",
+    "block.altoidstin.trapped_deepslate_gold_ore": "ブービートラップ深層金鉱石",
+    "block.altoidstin.trapped_deepslate_iron_ore": "ブービートラップ深層鉄鉱石",
+    "block.altoidstin.trapped_deepslate_lapis_ore": "ブービートラップ深層ラピスラズリ鉱石",
+    "block.altoidstin.trapped_deepslate_redstone_ore": "ブービートラップ深層レツドストーン鉱石",
+    "block.altoidstin.trapped_diamond_ore": "ブービートラップダイヤモンド鉱石",
+    "block.altoidstin.trapped_emerald_ore": "ブービートラップエメラルド鉱石",
+    "block.altoidstin.trapped_gold_ore": "ブービートラップ金鉱石",
+    "block.altoidstin.trapped_iron_ore": "ブービートラップ鉄鉱石",
+    "block.altoidstin.trapped_lapis_ore": "ブービートラップラピスラズリ鉱石",
+    "block.altoidstin.trapped_nether_gold_ore": "ブービートラップネザー金鉱石",
+    "block.altoidstin.trapped_nether_quartz_ore": "ブービートラップネザー水晶鉱石",
+    "block.altoidstin.trapped_redstone_ore": "ブービートラップレツドストーン鉱石",
+    "death.attack.trappedOre": "%1$sが罠で死んだ",
     "item.altoidstin.hash_brown": "ハッシュブラウン",
     "item.altoidstin.potato_shreds": "じゃがいも細切り"
 }
