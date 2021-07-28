@@ -136,41 +136,42 @@ public class TrappedOre {
         @Environment(EnvType.CLIENT)
         @Override
         public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-            // TODO: Make particles less noticible
-            // Get the current position of the block
-            double x = pos.getX();
-            double y = pos.getY();
-            double z = pos.getZ();
-            // Pick a random face to spawn the particle
-            int side = random.nextInt() % 6;
-            // Pick a random location on the chosen face
-            double offsetX = random.nextGaussian() / 2;
-            double offsetY = random.nextGaussian() / 2;
-            // Calculate the coordinates for the place we just selected
-            switch(side) {
-                case 0:
-                    x += 1.0;
-                case 1:
-                    y += offsetX;
-                    z += offsetY;
-                    break;
-                case 2:
-                    y += 1.0;
-                case 3:
-                    x += offsetX;
-                    z += offsetY;
-                    break;
-                case 4:
-                    z += 1.0;
-                case 5:
-                    x += offsetX;
-                    y += offsetY;
-                    break;
-                default:
-                    break; // How do we even get here?
+            if(Math.random() > 0.5) {
+                // Get the current position of the block
+                double x = pos.getX();
+                double y = pos.getY();
+                double z = pos.getZ();
+                // Pick a random face to spawn the particle
+                int side = random.nextInt() % 6;
+                // Pick a random location on the chosen face
+                double offsetX = random.nextGaussian() / 2;
+                double offsetY = random.nextGaussian() / 2;
+                // Calculate the coordinates for the place we just selected
+                switch(side) {
+                    case 0:
+                        x += 1.0;
+                    case 1:
+                        y += offsetX;
+                        z += offsetY;
+                        break;
+                    case 2:
+                        y += 1.0;
+                    case 3:
+                        x += offsetX;
+                        z += offsetY;
+                        break;
+                    case 4:
+                        z += 1.0;
+                    case 5:
+                        x += offsetX;
+                        y += offsetY;
+                        break;
+                    default:
+                        break; // How do we even get here?
+                }
+                // Add the gunpowder particle to the world
+                world.addParticle(ParticleTypes.SMOKE, x, y, z, 0.0D, 0.0D, 0.0D);
             }
-            // Add the gunpowder particle to the world
-            world.addParticle(ParticleTypes.SMOKE, x, y, z, 0.0D, 0.0D, 0.0D);
         }
     }
 
