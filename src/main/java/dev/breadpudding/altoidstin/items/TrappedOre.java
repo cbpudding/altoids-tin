@@ -100,7 +100,6 @@ public class TrappedOre {
         if(this.type == OreType.NETHER) {
             foundLocation = BiomeSelectors.foundInTheNether();
         }
-        // TODO: Find a way to do this without using deprecated APIs
         BiomeModifications.addFeature(foundLocation, GenerationStep.Feature.UNDERGROUND_ORES, key);
     }
 
