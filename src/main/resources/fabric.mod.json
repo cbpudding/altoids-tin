@@ -31,6 +31,9 @@
     "entrypoints": {
         "main": [
             "dev.breadpudding.altoidstin.AltoidsTin"
+        ],
+        "client": [
+            "dev.breadpudding.altoidstin.AltoidsTinClient"
         ]
     },
     "depends": {

@@ -1,6 +1,7 @@
 package dev.breadpudding.altoidstin;
 
 import dev.breadpudding.altoidstin.items.*;
+import dev.breadpudding.altoidstin.entities.penguin.*;
 import net.fabricmc.api.ModInitializer;
 
 /**
@@ -26,6 +27,9 @@ public class AltoidsTin implements ModInitializer {
         HashBrown.register();
         PotatoShreds.register();
         TrappedOres.register();
+
+        // Entities
+        Penguin.register();
         // ...
     }
 }
