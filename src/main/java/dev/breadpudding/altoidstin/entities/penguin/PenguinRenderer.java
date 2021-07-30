@@ -7,7 +7,7 @@ import net.minecraft.util.Identifier;
 
 public class PenguinRenderer extends MobEntityRenderer<Penguin, PenguinModel> {
     public PenguinRenderer(EntityRendererFactory.Context context) {
-        super(context, new PenguinModel(context.getPart(AltoidsTinClient.MODEL_PENGUIN_LAYER)), 0.5f);
+        super(context, new PenguinModel(context.getPart(AltoidsTinClient.MODEL_PENGUIN_LAYER)), /* Shadow Radius */ 0.3f);
     }
 
     @Override

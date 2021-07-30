@@ -1,8 +1,11 @@
 package dev.breadpudding.altoidstin;
 
-import dev.breadpudding.altoidstin.items.*;
-import dev.breadpudding.altoidstin.entities.penguin.*;
+import dev.breadpudding.altoidstin.entities.penguin.Penguin;
+import dev.breadpudding.altoidstin.items.HashBrown;
+import dev.breadpudding.altoidstin.items.PotatoShreds;
+import dev.breadpudding.altoidstin.items.TrappedOres;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 
 /**
  * An Altoids tin filled with insanity

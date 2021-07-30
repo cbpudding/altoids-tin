@@ -16,9 +16,7 @@ public class AltoidsTinClient implements ClientModInitializer {
     public static final EntityModelLayer MODEL_PENGUIN_LAYER = new EntityModelLayer(new Identifier("altoidstin", "penguin"), "main");
     @Override
     public void onInitializeClient() {
-        EntityRendererRegistry.INSTANCE.register(Penguin.PENGUIN, (context) -> {
-            return new PenguinRenderer(context);
-        });
+        EntityRendererRegistry.INSTANCE.register(Penguin.PENGUIN, PenguinRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(MODEL_PENGUIN_LAYER, PenguinModel::getTexturedModelData);
     }
 }

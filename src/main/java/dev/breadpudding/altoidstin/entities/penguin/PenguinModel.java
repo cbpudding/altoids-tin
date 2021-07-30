@@ -4,6 +4,7 @@ import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.math.MathHelper;
 
 public class PenguinModel extends EntityModel<Penguin> {
     private final ModelPart head;
@@ -25,15 +26,19 @@ public class PenguinModel extends EntityModel<Penguin> {
     public static TexturedModelData getTexturedModelData() {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
+        /*
+         * Information about following structure:
+         * Cuboids are placed relative to the pivot point
+         * The uv() call defines the texture coordinates for the following cuboid
+         */
         modelPartData.addChild(
                 "head",
                 ModelPartBuilder.create()
                 .uv(16, 0)
-                .cuboid(-2.0F, -15.0F, -3.0F, 4.0F, 4.0F, 4.0F)
+                .cuboid(-2.0F, -4.0F, -2.0F, 4.0F, 4.0F, 4.0F)
                 .uv(0, 5)
-                .cuboid(-1.0F, -13.0F, -6.0F, 2.0F, 1.0F, 3.0F),
-                ModelTransform.pivot(0.0F, 24.0F, 0.0F)
-
+                .cuboid(-1.0F, -2.0F, -5.0F, 2.0F, 1.0F, 3.0F),
+                ModelTransform.pivot(0.0F, 13.0F, -1.0F)
         );
 
         modelPartData.addChild(
@@ -80,15 +85,32 @@ public class PenguinModel extends EntityModel<Penguin> {
         return TexturedModelData.of(modelData, 32, 32);
     }
 
+    // Function that handles animating the model
     @Override
-    public void setAngles(Penguin entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch){
-		//previously the render function, render code was moved to a method below
+    public void setAngles(Penguin entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch){
+		// Head rotation (values copied from QuadrupedEntityModel)
+        this.head.pitch = headPitch * 0.017453292F;
+        this.head.yaw = headYaw * 0.017453292F;
+
+        // Flipper animation (slowly getting closer and further away)
+        // TODO: Finalize the animation speed and amount
+        float flipper_anim = (animationProgress % 20)/2;
+        if(flipper_anim > 5) {
+            flipper_anim = 10 - flipper_anim;
+        }
+        this.flipper_l.roll = -0.1309F + (flipper_anim * 0.01F);
+        this.flipper_r.roll = 0.1309F - (flipper_anim *  0.01F);
+
+        // Feet when moving (I honestly have no idea how this works - slightly modified from QuadrupedEntityModel)
+        // TODO: Make it so the feet do not go into the ground
+        this.foot_l.pitch = MathHelper.cos(limbAngle * 0.6662F) * 1.4F * limbDistance / 2;
+        this.foot_r.pitch = MathHelper.cos(limbAngle * 0.6662F + 3.1415927F) * 1.4F * limbDistance / 2;
     }
     @Override
     public void render(MatrixStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
-        matrixStack.translate(0, 1, 0);
+		// TODO: Find a way to make the penguin walk above snow layers as not to hide its feet
 
-		head.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+        head.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
 		body.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
 		flipper_r.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
 		flipper_l.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
