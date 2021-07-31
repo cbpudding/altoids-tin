@@ -6,7 +6,7 @@ import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
 
-public class PenguinModel extends EntityModel<Penguin> {
+public class PenguinEntityModel extends EntityModel<PenguinEntity> {
     private final ModelPart head;
 	private final ModelPart body;
 	private final ModelPart flipper_r;
@@ -14,7 +14,21 @@ public class PenguinModel extends EntityModel<Penguin> {
 	private final ModelPart foot_r;
 	private final ModelPart foot_l;
 
-    public PenguinModel(ModelPart modelPart) {
+    private final boolean headScaled;
+    private final float childHeadYOffset;
+    private final float childHeadZOffset;
+    private final float invertedChildHeadScale;
+    private final float invertedChildBodyScale;
+    private final float childBodyYOffset;
+
+    public PenguinEntityModel(ModelPart modelPart) {
+        this.headScaled = true;
+        this.childHeadYOffset = 12.0F;
+        this.childHeadZOffset = 0.0F;
+        this.invertedChildHeadScale = 2.0F;
+        this.invertedChildBodyScale = 2.0F;
+        this.childBodyYOffset = 24;
+
         this.head = modelPart.getChild("head");
         this.body = modelPart.getChild("body");
         this.flipper_r = modelPart.getChild("flipper_r");
@@ -87,13 +101,12 @@ public class PenguinModel extends EntityModel<Penguin> {
 
     // Function that handles animating the model
     @Override
-    public void setAngles(Penguin entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch){
+    public void setAngles(PenguinEntity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch){
 		// Head rotation (values copied from QuadrupedEntityModel)
         this.head.pitch = headPitch * 0.017453292F;
         this.head.yaw = headYaw * 0.017453292F;
 
         // Flipper animation (slowly getting closer and further away)
-        // TODO: Finalize the animation speed and amount
         float flipper_anim = (animationProgress % 20)/2;
         if(flipper_anim > 5) {
             flipper_anim = 10 - flipper_anim;
@@ -102,19 +115,41 @@ public class PenguinModel extends EntityModel<Penguin> {
         this.flipper_r.roll = 0.1309F - (flipper_anim *  0.01F);
 
         // Feet when moving (I honestly have no idea how this works - slightly modified from QuadrupedEntityModel)
-        // TODO: Make it so the feet do not go into the ground
         this.foot_l.pitch = MathHelper.cos(limbAngle * 0.6662F) * 1.4F * limbDistance / 2;
         this.foot_r.pitch = MathHelper.cos(limbAngle * 0.6662F + 3.1415927F) * 1.4F * limbDistance / 2;
     }
     @Override
     public void render(MatrixStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
-		// TODO: Find a way to make the penguin walk above snow layers as not to hide its feet
+        if(this.child) {
+            // Perform scaling and translation to create a smaller model
+            matrixStack.push();
+            float g;
+            if(this.headScaled) {
+                g = 1.5F / this.invertedChildHeadScale;
+                matrixStack.scale(g, g, g);
+            }
 
-        head.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
-		body.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
-		flipper_r.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
-		flipper_l.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
-		foot_r.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
-		foot_l.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+            matrixStack.translate(0.0D, (double)(this.childHeadYOffset / 16.0F), (double)(this.childHeadZOffset / 16.0F));
+            head.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+            matrixStack.pop();
+            matrixStack.push();
+
+            g = 1.0F / this.invertedChildBodyScale;
+            matrixStack.scale(g, g, g);
+            matrixStack.translate(0.0F, (double)(this.childBodyYOffset/16.0F), 0.0D);
+            body.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+            flipper_r.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+            flipper_l.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+            foot_r.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+            foot_l.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+            matrixStack.pop();
+        } else {
+            head.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+            body.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+            flipper_r.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+            flipper_l.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+            foot_r.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+            foot_l.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+        }
     }
 }

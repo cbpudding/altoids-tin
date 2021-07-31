@@ -15,22 +15,25 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
-public class Penguin extends AnimalEntity {
-    public static final EntityType<Penguin> PENGUIN = Registry.register(
+public class PenguinEntity extends AnimalEntity {
+    // EntityType registration
+    public static final EntityType<PenguinEntity> PENGUIN = Registry.register(
             Registry.ENTITY_TYPE,
             new Identifier("altoidstin", "penguin"),
-            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, Penguin::new).dimensions(EntityDimensions.fixed(0.5F, 1.0F)).build()
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, PenguinEntity::new).dimensions(EntityDimensions.fixed(0.5F, 1.0F)).build()
     );
 
     private static final Ingredient BREEDING_INGREDIENT;
 
     public static void register() {
-        FabricDefaultAttributeRegistry.register(PENGUIN, Penguin.createMobAttributes());
+        // Enable spawning in icy biomes
+        FabricDefaultAttributeRegistry.register(PENGUIN, PenguinEntity.createMobAttributes());
         BiomeModifications.addSpawn(
                 BiomeSelectors.categories(Biome.Category.ICY),
                 SpawnGroup.CREATURE,
@@ -41,8 +44,9 @@ public class Penguin extends AnimalEntity {
         );
     }
 
-    public Penguin(EntityType<? extends AnimalEntity> entityType, World world) {
+    public PenguinEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
+
         this.initGoals();
     }
 
@@ -62,21 +66,27 @@ public class Penguin extends AnimalEntity {
 
     @Override
     public PassiveEntity createChild(ServerWorld serverWorld, PassiveEntity entity) {
-        // TODO: Make an actual baby penguin (and make sure the FollowParentGoal functions correctly)
         return PENGUIN.create(serverWorld);
     }
 
+    @Override
+    protected void eat(PlayerEntity player, Hand hand, ItemStack stack) {
+        if (stack.isOf(Items.TROPICAL_FISH_BUCKET) || stack.isOf(Items.COD_BUCKET) || stack.isOf(Items.SALMON_BUCKET)) {
+            player.setStackInHand(hand, new ItemStack(Items.WATER_BUCKET));
+        } else {
+            super.eat(player, hand, stack);
+        }
+    }
+
+    @Override
     public boolean isBreedingItem(ItemStack stack) {
         return BREEDING_INGREDIENT.test(stack);
     }
 
     static {
         BREEDING_INGREDIENT = Ingredient.ofItems(
-                Items.TROPICAL_FISH,
                 Items.TROPICAL_FISH_BUCKET,
-                Items.COD,
                 Items.COD_BUCKET,
-                Items.SALMON,
                 Items.SALMON_BUCKET
         );
     }

@@ -1,11 +1,10 @@
 package dev.breadpudding.altoidstin;
 
-import dev.breadpudding.altoidstin.entities.penguin.Penguin;
+import dev.breadpudding.altoidstin.entities.penguin.PenguinEntity;
 import dev.breadpudding.altoidstin.items.HashBrown;
 import dev.breadpudding.altoidstin.items.PotatoShreds;
 import dev.breadpudding.altoidstin.items.TrappedOres;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 
 /**
  * An Altoids tin filled with insanity
@@ -32,7 +31,7 @@ public class AltoidsTin implements ModInitializer {
         TrappedOres.register();
 
         // Entities
-        Penguin.register();
+        PenguinEntity.register();
         // ...
     }
 }
